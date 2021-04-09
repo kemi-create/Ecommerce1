@@ -1,0 +1,324 @@
+body {
+	margin: 0;
+	padding: 0;
+	color: #555;
+	font-family: sans-serif;
+}
+
+.t1 {
+	font-size: 35px;
+}
+
+.t2 {
+	font-size: 30px;
+}
+
+.t3 {
+	font-size: 25px;
+}
+
+.t4 {
+	font-size: 20px;
+}
+
+.t5 {
+	font-size: 17px;
+}
+
+.tb {
+	font-weight: 700;
+}
+
+.dr {
+	display: flex;
+	flex-direction: row;
+}
+
+.dc {
+	display: flex;
+	flex-direction: column;
+}
+
+.jsb {
+	justify-content: space-between;
+}
+
+.jc {
+	justify-content: center;
+}
+
+.jsa {
+	justify-content: space-around;
+}
+
+.aic {
+	align-items: center;
+}
+
+a {
+	text-decoration: none;
+	color: #555;
+}
+
+section {
+	padding: 0 250px;	
+}
+
+@media screen and ( max-width: 1440px ) {
+	section {
+		padding: 0 25px;
+	}
+}
+
+.header {
+	width: 100%;
+	height: 70px;
+	box-shadow: 2px 2px 5px #aaa;
+	background-color: #ddd;
+}
+
+.header .brand {
+	line-height: 70px;
+	margin-left: 25px;
+}
+
+.header .user i {
+	line-height: 70px;
+	margin-right: 25px;
+	cursor: pointer;
+}
+
+.header .menu {
+	position: absolute;
+	top: 80px;
+	right: 10px;
+	border: 1px solid #ccc;
+	padding: 15px 5px;
+	z-index: 1000;
+	background-color: white;
+}
+
+.header .menu div:hover {
+	background-color: #eee;
+}
+
+@media screen and ( max-width: 500px ) {
+	.header .menu {
+		width: 100%;
+		top: 70px;
+		left: 0;
+		padding: 0;
+	}
+
+	.header .menu div {
+		padding: 10px 0!important;
+		display: flex;
+		justify-content: center;
+	}
+
+}
+
+.header .menu div {
+	padding: 10px 50px;
+	border-bottom: 1px solid #ddd;
+}
+
+.header .menu div:hover {
+	color: #555;
+	cursor: pointer;
+}
+
+.body {
+	width: 100%;
+	height: auto;
+}
+
+.body .title {
+	padding: 25px;
+}
+
+.body .title label {
+	margin-right: 15px;
+}
+
+.body .search {
+
+}
+
+input {
+	font-size: 18px;
+	color: #555;
+	outline-style: none;
+	border: 1px solid #aaa;
+}
+
+.body .search .search_box {
+	width: 50%;
+}
+
+.body .search .search_box input{
+	width: 100%;
+	height: 38px;
+	margin: 0;
+	padding: 0 10px;
+}
+
+.body .search .search_button {
+	width: 120px;
+}
+
+.body .search .search_button input {
+	width: 100%;
+	height: 40px;
+	padding: 0;
+	margin: 0 25px;
+	transition: 0.5s;
+	background-color: #ddd;
+}
+
+.body .search .search_button input:hover {
+	opacity: 0.8;
+	transition: 0.5s;
+}
+
+.body .item_list {
+
+}
+
+.body .item_list .row {
+	margin: 20px 0;
+}
+
+.body .item_list .row .item {
+	width: 23%;
+	min-width: 225px;
+	margin: 0 1%;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	box-shadow: 2px 3px 5px #999;
+	background-color: #ddd;
+	position: relative;
+}
+
+.body .item_list .row .item .book_cover {
+}
+
+.body .item_list .row .item .book_cover img {
+	width: 100%;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+}
+
+.body .item_list .row .item .item_title {
+	padding: 20px;
+    margin-bottom: 40px;
+	text-align: center;
+}
+
+.body .item_list .row .item .charge_favorite {
+	width: calc( 100% - 50px );
+	margin: 0 25px 25px 25px;
+	position: absolute;
+	bottom: 0
+}
+
+.body .item_list .row .item .charge_favorite i {
+	font-size: 20px;
+}
+
+@media screen and ( max-width: 1024px ) {
+	section {
+		padding: 0 100px;
+	}
+
+	.body .item_list .row {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.body .item_list .row .item {
+		width: 40%;
+		margin: 3%;
+	}
+	.body .item_list .row {
+		margin: 5px 0;
+	}
+}
+
+@media screen and ( max-width: 768px ) {
+	section {
+		padding: 0;
+	}
+
+	.body .item_list .row .item {
+		margin-bottom: 10px;
+	}
+
+}
+
+footer {
+	width: 100%;
+	color: #ddd;
+	background-color: #333;
+}
+
+footer .footer_top {
+	padding: 50px;
+}
+
+footer .footer_top .phone_number div {
+	padding: 5px 0;
+}
+
+footer .footer_top .mail_address div {
+	padding: 5px 0;
+}
+
+footer .footer_bottom {
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	background-color: #333;
+}
+
+.social_icon a {
+  padding: 10px;
+  font-size: 20px;
+  width: 22px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+  border-radius: 50%;
+  box-shadow: 1px 2px 3px #222;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-google {
+  background: #dd4b39;
+  color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.fa-youtube {
+  background: #bb0000;
+  color: white;
+}
+
+

@@ -100,6 +100,7 @@ section {
 
 .header .menu div:hover {
 	background-color: #eee;
+	transition: 0.5s;
 }
 
 @media screen and ( max-width: 500px ) {

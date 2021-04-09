@@ -1,0 +1,39 @@
+Create an E-Commerce Site for selling items.
+
+Note: All the Data should be stored using API using Node Js and MongoDB.
+The Project must use Html5, CSS and jQuery or jQuery mobile.
+
+Note: UI should be design based on the requirement.
+
+1. Login Screen: User Login:
+
+• The user should be able to sign in using an email ID and password
+• The username must use an email ID
+• Users' information should be validated using the Node Js API.
+• Error Messages should apply appropriately displayed.
+
+2. Register Screen:
+
+• The user should be able to register by providing the required information: Name, Email ID & Password, Phone Number, and Age.
+• Users' data will be stored using the Node Js API.
+• Android Dialog for any validation.
+
+
+3. Welcome Dashboard.
+
+• title should display Welcome + Name of the user logged in
+• User Edit Page –
+• User should be able to modify their information (Email, phone..etcc)
+
+
+4. Lis of items:
+Another Screen will allow the user to display the item the list and add items to my favourite list.
+The search must be implemented for any list view.
+
+• List of Favorite Item/any item user added to the favourite list.
+• list view should include the following information: (Name, Available #, Image)
+• Search should be available on your list of items
+
+
+When the user clicks on one of the lists, it will ask the user if needed to be added to the Favorite.
+Once the user clicks yes, it will be added to the favourite list, if the user clicks no; then nothing happens.

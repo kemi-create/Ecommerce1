@@ -1,3 +1,7 @@
+html {
+	scroll-behavior: smooth;
+}
+
 body {
 	margin: 0;
 	padding: 0;
@@ -53,6 +57,14 @@ body {
 
 .aic {
 	align-items: center;
+}
+
+.z1000 {
+	z-index: 1000;
+}
+
+.z2000 {
+	z-index: 2000;
 }
 
 ::placeholder {
@@ -310,27 +322,6 @@ section {
     }
 }
 
-.popup-1 {
-    background-color: green !important;
-    background-image: none !important;
-}
-
-.popup-1:before, .popup-4:before {
-    content: none !important;
-}
-
-.popup-2 {
-    background-color: transparent !important;
-    color: white;
-}
-
-.popup-4 {
-    background-color: transparent !important;
-    background-image: url('../assets/images/starter_pack/designed_popup.png');
-    width: 300px;
-    height: 381px;
-}
-
 #popup[active-popup=".popup-4"] .close-popup {
     margin-top: 10px;
     margin-right: -10px;
@@ -382,8 +373,11 @@ section {
 }
 
 #popup .popup-login {
-	width: 370px;
-	height: 450px;
+	position: absolute;
+	left: calc( 50% - 225px );
+	top: calc( 50% - 165px );
+	width: 350px;
+	height: 330px;
 	padding: 25px 50px;
 	display: flex!important;
 	flex-direction: column;
@@ -402,6 +396,82 @@ section {
 
 #popup .popup-login label {
 	padding: 5px 0;
+	opacity: 0;
+}
+
+#popup .popup-login .login_btns a {
+	width: 120px;
+	height: 35px;
+	margin: 10px 5px 0 5px;
+	border: 1px solid #999;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.close-popup {
+	display: none;
+}
+
+#popup .popup-register {
+	position: absolute;
+	left: calc( 50% - 225px );
+	top: calc( 50% - 380px );
+	width: 350px;
+	height: 760px;
+	padding: 25px 50px;
+	display: flex!important;
+	flex-direction: column;
+}
+
+#popup .popup-register p {
+	display: flex;
+	justify-content: left;
+	margin: 5px 0;
+}
+
+#popup .popup-register input {
+	height: 38px;
+	padding: 0 10px;
+}
+
+#popup .popup-register label {
+	padding: 5px 0;
+	opacity: 0;
+}
+
+#popup .popup-register .register_btns a {
+	width: 120px;
+	height: 35px;
+	margin: 10px 5px 0 5px;
+	border: 1px solid #999;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+@media screen and ( max-width: 500px ) {
+	#popup .popup-login {
+		width: 275px;
+		padding: 20px;
+	}
+
+	#popup .popup-login {
+		position: absolute;
+		left: calc( 50% - 153px );
+		top: calc( 50% - 165px );
+	}
+
+	#popup .popup-register {
+		width: 275px;
+		padding: 20px;
+	}
+
+	#popup .popup-register {
+		position: absolute;
+		left: calc( 50% - 153px );
+		top: calc( 50% - 380px );
+	}
 }
 
 .body {
@@ -570,7 +640,7 @@ footer .footer_bottom {
 	background-color: #333;
 }
 
-footer .up_arrow {
+footer .up_arrow a {
 	position: fixed;
     bottom: 20px;
     right: 20px;
@@ -585,7 +655,7 @@ footer .up_arrow {
 }
 
 @media screen and ( max-width: 500px ) {
-	footer .up_arrow {
+	footer .up_arrow a {
 		display: none;
 	}
 }

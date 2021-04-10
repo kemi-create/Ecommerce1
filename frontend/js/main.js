@@ -24,9 +24,24 @@ $(".menu").focusin(function(){
 	alert("admin");
 });
 
-// $(document).click(function(event) {
-//   var $target = $(event.target);
-//   if( !$target.closest('.menu').length || $('.menu').is(":visible") ) {
-//     $('.menu').hide();
-//   }
-// });
+// login/register modal
+$("#btnLogin").click(function() {
+	$(".popup-login").removeClass("z1000");
+	$(".popup-register").removeClass("z2000");
+	$(".popup-login").addClass("z2000");
+	$(".popup-register").addClass("z1000");
+});
+
+$("#btnRegister").click(function() {
+	$(".popup-login").removeClass("z2000");
+	$(".popup-register").removeClass("z1000");
+	$(".popup-login").addClass("z1000");
+	$(".popup-register").addClass("z2000");
+});
+// login/register modal
+
+// login start
+
+
+
+// login end

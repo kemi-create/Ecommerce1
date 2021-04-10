@@ -13,8 +13,8 @@
 			<div class="brand t1"><a href="#">Book Store</a></div>
 			<div class="user"><i class="fa fa-user-circle-o t1"></i></div>
 			<div class="login_in_re dr">
-				<div><input type="button" value="Sigin In" /></div>
-				<div><input type="button" value="Register" /></div>
+				<a class="login" href='javascript: Pages.Popup.openPopupByElement(".popup-login"); void(0);'>SiginIn</a>
+				<a class="register" href='javascript: Pages.Popup.openPopupByElement(".popup-register", {showCloseBtn: false}); void(0);'>Register</a>
 			</div>
 			<div class="menu t5">
 				<div>Sigin Out</div>
@@ -26,11 +26,38 @@
 	</header>
 
 	<div class="body">
+		<div id="popup">
+			<div id="popup_container">
+				<div id="popup_content">
+					<div class="popup popup-login">
+						<h2>LOGIN</h2>
+						<p>Username or Email</p>
+						<input class="user_mail" type="text" name="" placeholder="username or mail">
+						<label>wrong</label>
+						
+						<p>Password</p>
+						<input type="password" name="" placeholder="password">
+						<label>wrong</label>
+
+						<p>Confirm</p>
+						<input type="password" name="" placeholder="confirm">
+						<label>wrong</label>
+
+						<div class="login_btns">
+							<div class="btn_ok"><a href="#" onclick="Pages.Popup.closePopup();">ok</a></div>
+							<div class="btn_cancel"><a href="#" onclick="Pages.Popup.closePopup();">cancel</a></div>
+						</div>
+					</div>
+					<div class="popup popup-register">Loading...</div>
+					<div class="popup popup-3">admin</div>
+				</div>
+			</div>
+		</div>
 		<section class="title dr jc t2">
 			<div class="dr"><label>Welcome</label><div>jhon</div></div>
 		</section>
 		<section class="search dr jc">
-			<div class="search_box"><input type="text" placeholder="input search text" name=""></div>
+			<div class="search_box"><input type="text" placeholder="search" name=""></div>
 			<div class="search_button"><input type="button" name="" value="search"></div>
 		</section>
 		<section class="item_list">
@@ -204,8 +231,10 @@
 		<div class="footer_bottom">
 			<div>@2021 Copyright: Book Store.com</div>
 		</div>
+		<div class="up_arrow">^</div>
 	</footer>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="./js/main.js"></script>
+<script src="./js/slash.app.2.8.min.js"></script>
 </html>

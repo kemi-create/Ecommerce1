@@ -83,6 +83,7 @@ section {
 }
 
 .header .user i {
+	display: none;
 	line-height: 70px;
 	margin-right: 25px;
 	cursor: pointer;
@@ -136,8 +137,6 @@ section {
 	transition: 0.5s;
 }
 
-
-
 @media screen and ( max-width: 500px ) {
 	.header .menu {
 		width: 100%;
@@ -170,6 +169,24 @@ section {
 .header .menu div:hover {
 	color: #555;
 	cursor: pointer;
+}
+
+.header .login_in_re {
+	line-height: 70px;
+	margin: 0 25px 0 0;
+}
+
+.header .login_in_re div input {
+	height: 35px;
+	padding: 0 10px;
+	margin: 0 5px; 
+	transition: 0.5S;
+}
+
+.header .login_in_re div input:hover {
+	background-color: #ccc;
+	border: 1px solid #999;
+	transition: 0.5S;
 }
 
 .body {

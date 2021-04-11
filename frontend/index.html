@@ -9,19 +9,24 @@
 </head>
 <body>
 	<header>
-		<div class="header dr jsb">
-			<div class="brand t1"><a href="#">Book Store</a></div>
-			<div class="user"><i class="fa fa-user-circle-o t1"></i></div>
-			<div class="login_in_re dr">
-				<a id="btnLogin" class="login" href='javascript: Pages.Popup.openPopupByElement(".popup-login"); void(0);'>SiginIn</a>
-				<a id="btnRegister" class="register" href='javascript: Pages.Popup.openPopupByElement(".popup-register", {showCloseBtn: false}); void(0);'>Register</a>
+		<div class="header">
+			<div class="home_header dr jsb">
+				<div class="brand t1"><a href="#">Book Store</a></div>
+				<div class="login_in_re dr">
+					<a id="btnLogin" class="login" href='javascript: Pages.Popup.openPopupByElement(".popup-login"); void(0);'>Sigin In</a>
+					<a id="btnRegister" class="register" href='javascript: Pages.Popup.openPopupByElement(".popup-register", {showCloseBtn: false}); void(0);'>Register</a>
+				</div>
 			</div>
-			<div class="menu t5">
-				<div>Sigin Out</div>
-				<div>Profile</div>
-				<div>Favorite</div>
+			<div class="user_header dr jsb">
+				<div class="brand t1"><a href="#">Book Store</a></div>
+				<div class="user"><i class="user_icon fa fa-user-circle-o t1"></i></div>
+				<div class="menu t5">
+					<div>Sigin Out</div>
+					<div>Profile</div>
+					<div>Favorite</div>
+				</div>
+				<div class="menu_without_section"></div>
 			</div>
-			<div class="menu_without_section"></div>
 		</div>
 	</header>
 
@@ -80,7 +85,7 @@
 						<label>wrong</label>
 
 						<div class="register_btns dr jc t4">
-							<div id="btnRegisterOk" class="btn_ok register_ok"><a href="#" onclick="Pages.Popup.closePopup();">register</a></div>
+							<div id="btnRegisterOk" class="btn_ok register_ok"><a href="#">register</a></div>
 							<div class="btn_cancel register_cancel"><a href="#" onclick="Pages.Popup.closePopup();">cancel</a></div>
 						</div>
 					</div>

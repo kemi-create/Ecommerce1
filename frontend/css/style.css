@@ -102,13 +102,21 @@ section {
 	background-color: #ddd;
 }
 
+.header .home_header {
+
+}
+
+.header .user_header {
+	display: none;
+}
+
 .header .brand {
 	line-height: 70px;
 	margin-left: 25px;
 }
 
 .header .user i {
-	display: none;
+	/*display: none;*/
 	line-height: 70px;
 	margin-right: 25px;
 	cursor: pointer;
@@ -223,6 +231,7 @@ section {
 }
 
 .header .login_in_re a {
+	height: 38px;
 	border: 1px solid #999;
 	display: flex;
 	justify-content: center;

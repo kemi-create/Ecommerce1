@@ -48,39 +48,39 @@
 						<h2>REGISTER</h2>
 						
 						<p>Real Name</p>
-						<input class="user_mail" type="text" name="" placeholder="username or mail">
+						<input class="real_name" type="text" name="" placeholder="username or mail">
 						<label>wrong</label>
 						
-						<p>Mail</p>
-						<input class="user_mail" type="text" name="" placeholder="username or mail">
-						<label>wrong</label>
-
 						<p>Sex</p>
 						<div>
-							<select>
-								<option>Man</option>
-								<option>Woman</option>
+							<select class="sex">
+								<option value="1">Man</option>
+								<option value="0">Woman</option>
 							</select>
 						</div>
 
 						<p>Birthday</p>
-						<input class="user_mail" type="date" name="" placeholder="username or mail">
+						<input class="birthday" type="date" name="" placeholder="username or mail">
 						<label>wrong</label>
 
 						<p>Phone Number</p>
-						<input class="user_mail" type="text" name="" placeholder="username or mail">
+						<input class="phone_number" type="text" name="" placeholder="username or mail">
+						<label>wrong</label>
+
+						<p>Mail</p>
+						<input class="mail" type="text" name="" placeholder="username or mail">
 						<label>wrong</label>
 
 						<p>Password</p>
-						<input type="password" name="" placeholder="password">
+						<input class="re_pass" type="password" name="" placeholder="password">
 						<label>wrong</label>
 
 						<p>Confirm</p>
-						<input type="password" name="" placeholder="confirm">
+						<input class="confirm" type="password" name="" placeholder="confirm">
 						<label>wrong</label>
 
 						<div class="register_btns dr jc t4">
-							<div class="btn_ok register_ok"><a href="#" onclick="Pages.Popup.closePopup();">register</a></div>
+							<div id="btnRegisterOk" class="btn_ok register_ok"><a href="#" onclick="Pages.Popup.closePopup();">register</a></div>
 							<div class="btn_cancel register_cancel"><a href="#" onclick="Pages.Popup.closePopup();">cancel</a></div>
 						</div>
 					</div>

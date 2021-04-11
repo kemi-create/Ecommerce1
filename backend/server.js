@@ -1,8 +1,8 @@
+require('dotenv').config()
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const cors = require("cors");
-
 const app = express();
 const config = require('./app/config/db.config');
 
@@ -18,9 +18,9 @@ app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
-const MONGODB_URI = config.mongodburi || 'mongodb://localhost:27017/member-area';
+const MONGODB_URI = config.mongodburi || 'mongodb://localhost:27017/ecommerce';
 
-mongoose.connect('mongodb://localhost:27017/member-area', {
+mongoose.connect(MONGODB_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
     useCreateIndex: true
@@ -37,6 +37,7 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/user.routes")(app);
+require("./app/routes/product.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

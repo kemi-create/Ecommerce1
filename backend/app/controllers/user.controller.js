@@ -4,11 +4,11 @@ const jwt = require("jsonwebtoken");
 
 const config = require("../config/jwt.config");
 
-const checkDuplicateEmail = (mail) => {
+const checkDuplicateEmail = (email) => {
   // Email
   User.findOne({
     where: {
-      mail: mail,
+      email: email,
     },
   }).then((user) => {
     if (user) {
@@ -38,6 +38,7 @@ exports.signin = (req, res) => {
             {
               id: user._id,
               email: user.email,
+              realname: user.realname
             },
             config.jwtSecret
           );
@@ -53,6 +54,7 @@ exports.signin = (req, res) => {
 };
 
 exports.signup = (req, res) => {
+  console.log(req.body);
   if (!req.body.realname) {
     res.status(400).send({
       message: "Name can not be empty!",
@@ -86,7 +88,7 @@ exports.signup = (req, res) => {
   // }
   const realname = req.body.realname || "";
   const sex = req.body.sex || 0;
-  const mail = req.body.mail || "";
+  const email = req.body.mail || "";
   const password = req.body.password || "";
   const birthday = req.body.birthday || "";
   const phonenumber = req.body.phonenumber || "";
@@ -94,7 +96,7 @@ exports.signup = (req, res) => {
   const newUser = new User({
     realname: realname,
     sex: sex,
-    mail: mail,
+    email: email,
     password: password,
     birthday: birthday,
     phonenumber: phonenumber,

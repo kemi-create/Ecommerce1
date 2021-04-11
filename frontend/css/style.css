@@ -33,6 +33,14 @@ body {
 	font-weight: 700;
 }
 
+.df {
+	display: flex!important;
+}
+
+.dn {
+	display: none!important;
+}
+
 .dr {
 	display: flex;
 	flex-direction: row;
@@ -102,14 +110,14 @@ section {
 	background-color: #ddd;
 }
 
-.header .home_header {
+/*.header .home_header {
 
 }
 
 .header .user_header {
-	display: none;
-}
 
+}
+*/
 .header .brand {
 	line-height: 70px;
 	margin-left: 25px;

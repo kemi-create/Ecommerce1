@@ -8,12 +8,14 @@ $( document ).ready(function() {
 		var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
 		    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
 		}).join(''));
-		$(".home_header").hide();
-		$(".user_header").show();
+		$(".home_header").addClass("df");
+		$(".user_header").removeClass("dn");
+		$(".home_header").addClass("df");
+		$(".user_header").removeClass("dn");
 		console.log(JSON.parse(jsonPayload));
 	} else {
-		$(".home_header").show();
-		$(".user_header").hide();
+		$(".home_header").addClass("dn");
+		$(".user_header").removeClass("df");
 	}
 
     console.log( "ready!" );

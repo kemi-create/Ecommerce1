@@ -42,6 +42,23 @@ $("#btnRegister").click(function() {
 
 // login start
 
+$("#btnOk").click(function () {
+  let user_mail = $(".user_mail").val();
+  let password = $(".password").val();
 
+  if (password) {
+    $.ajax({
+      type: "POST",
+      url: "http://192.168.107.164:8080/api/users/signin",
+      data: {
+        user_mail: user_mail,
+        password: password,
+      },
+      success: function(data) {
+        console.log("dddd", data);
+      }
+    });
+  }
+});
 
 // login end

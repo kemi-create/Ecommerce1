@@ -8,20 +8,22 @@ $( document ).ready(function() {
 		var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
 		    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
 		}).join(''));
-		$(".home_header").addClass("df");
-		$(".user_header").removeClass("dn");
-		$(".home_header").addClass("df");
-		$(".user_header").removeClass("dn");
-		console.log(JSON.parse(jsonPayload));
-	} else {
 		$(".home_header").addClass("dn");
+		$(".user_header").addClass("df");
+		$(".home_header").removeClass("df");
+		$(".user_header").removeClass("dn");
+		// console.log(JSON.parse(jsonPayload));
+	} else {
+		$(".home_header").addClass("df");
+		$(".user_header").addClass("dn");
+		$(".home_header").removeClass("dn");
 		$(".user_header").removeClass("df");
 	}
 
     console.log( "ready!" );
 	$.ajax({
 		type: "GET",
-		url: "http://192.168.107.47:8080/api/products",
+		url: "http://localhost:8080/api/products",
 		success: function(data) {
 			console.log("dddd", data);
 			// localStorage.setItem("user", JSON.stringify(data));
@@ -75,7 +77,7 @@ $( document ).ready(function() {
 	  if (password) {
 	    $.ajax({
 	      type: "POST",
-	      url: "http://192.168.107.47:8080/api/users/signin",
+	      url: "http://localhost:8080/api/users/signin",
 	      data: {
 	        user_mail: user_mail,
 	        password: password,
@@ -83,7 +85,13 @@ $( document ).ready(function() {
 	      success: function(data) {
 	      	// console.log(data.errors);
 	      	if (data.errors) {
-	      		alert("no user");
+	      		alert("This user is not registered.")
+	      		$(".home_header").addClass("df");
+				$(".user_header").addClass("dn");
+				$(".home_header").removeClass("dn");
+				$(".user_header").removeClass("df");
+				$(".user_mail").val("");
+				$(".password").val("");
 	      	} else {
 	        	localStorage.setItem("user", JSON.stringify(data));
 
@@ -97,10 +105,12 @@ $( document ).ready(function() {
 				}).join(''));
 				// return JSON.parse(jsonPayload);
 				console.log(JSON.parse(jsonPayload));
-				$(".home_header").hide();
-				$(".user_header").show();
+				$(".home_header").addClass("dn");
+				$(".user_header").addClass("df");
+				$(".home_header").removeClass("df");
+				$(".user_header").removeClass("dn");;
+		        Pages.Popup.closePopup();
 	      	}
-	        Pages.Popup.closePopup();
 	      }
 	    });
 	  }
@@ -130,7 +140,7 @@ $( document ).ready(function() {
 						password: password,
 					},
 					success: function(data) {
-						alert("success");
+						alert(data);
 						Pages.Popup.closePopup();
 					}
 				});

@@ -130,7 +130,7 @@ $( document ).ready(function() {
 			if (realname!=""&&sex!=""&&birthday!=""&&birthday!="mm/dd/yyyy"&&phonenumber!=""&&mail!=""&&password!=""&&confirm!="") {
 				$.ajax({
 					type: "POST",
-					url: "http://192.168.107.47:8080/api/users/signup",
+					url: "http://localhost:8080/api/users/signup",
 					data: {
 						realname: realname,
 						sex: sex,

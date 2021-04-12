@@ -111,7 +111,10 @@ exports.signup = (req, res) => {
       newUser.password = hash;
       // Save the User
       newUser.save(function (err) {
-        if (err) return err;
+        if (err) {
+          res.json({ error: "user existed" });
+          return err;
+        };
         res.json({ success: "success" });
       });
     });

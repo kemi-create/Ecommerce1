@@ -562,12 +562,13 @@ input {
 
 .body .item_list .row {
 	margin: 20px 0;
+	flex-wrap: wrap;
 }
 
 .body .item_list .row .item {
-	width: 23%;
+	width: 22%;
 	min-width: 225px;
-	margin: 0 1%;
+	margin: 1% 1%;
 	border: 1px solid #ccc;
 	border-radius: 10px;
 	box-shadow: 2px 3px 5px #999;

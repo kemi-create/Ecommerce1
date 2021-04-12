@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const cors = require("cors");
 const app = express();
 const config = require('./app/config/db.config');
+const path = require('path');
 
 // var corsOptions = {
 //   origin: "http://localhost:8081",
@@ -17,6 +18,7 @@ app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, '/')));
 
 const MONGODB_URI = config.mongodburi || 'mongodb://localhost:27017/ecommerce';
 

@@ -26,8 +26,20 @@ $( document ).ready(function() {
 		type: "GET",
 		url: "http://localhost:8080/api/products",
 		success: function(data) {
-			console.log("dddd", data);
-			// localStorage.setItem("user", JSON.stringify(data));
+			// console.log("dddd", data.products[1].image);
+			for (var i = 0; i < data.products.length; i++) {
+				console.log("dddd", data.products[i].image);
+				$(".home_product").append(
+					"<div class='item'>"+
+						"<div class='book_cover'><img src='"+data.products[i].image+"'></div>"+
+						"<div class='item_title t4 dr jc'>"+data.products[i].title+"</div>"+
+						"<div class='charge_favorite dr jsb'>"+
+							"<div class='charge'>"+data.products[i].items+"</div>"+
+							"<div class='favorite'><i class='fa fa-heart'></i></div>"+
+						"</div>"+
+					"</div>"
+				);
+			}
 		}
 	});
 

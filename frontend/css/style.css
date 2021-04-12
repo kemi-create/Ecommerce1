@@ -631,6 +631,14 @@ input {
 		margin-bottom: 10px;
 	}
 
+	.body .search .search_button input {
+		margin: 0;
+	}
+
+	.body .search .search_box input {
+		width: 90%;
+	}
+
 }
 
 footer {

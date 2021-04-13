@@ -679,6 +679,10 @@ input {
 	bottom: 0
 }
 
+.body .item_list .row .item .charge_favorite .true{
+	color: #c0323b;
+}
+
 .body .item_list .row .item .charge_favorite i {
 	cursor: pointer;
 	font-size: 20px;

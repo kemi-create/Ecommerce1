@@ -145,7 +145,7 @@ $(document).ready(function () {
                 .join("")
             );
             $(".title").html(
-              "<div class='dr'><label>Welcome</label><div class='w_realname'>" +
+            	"<div class='dr'><label>Welcome</label><div class='w_realname'>" +
                 JSON.parse(jsonPayload).realname +
                 "</div></div>"
             );
@@ -213,6 +213,59 @@ $(document).ready(function () {
   });
   // register end
 
+  // profile start
+
+$("#btnProfileOk").click(function () {
+    let realname = $(".real_name").val();
+    let sex = $(".sex").val();
+    let birthday = $(".birthday").val();
+    let phonenumber = $(".phone_number").val();
+    let mail = $(".mail").val();
+    let password = $(".re_pass").val();
+    let confirm = $(".confirm").val();
+    if (password == confirm) {
+      if (
+        realname != "" &&
+        sex != "" &&
+        birthday != "" &&
+        birthday != "mm/dd/yyyy" &&
+        phonenumber != "" &&
+        mail != "" &&
+        password != "" &&
+        confirm != ""
+      ) {
+        $.ajax({
+          type: "POST",
+          url: "http://192.168.107.47:8080//api/users/profile/edit",
+          data: {
+            realname: realname,
+            sex: sex,
+            birthday: birthday,
+            phonenumber: phonenumber,
+            mail: mail,
+            password: password,
+          },
+          success: function (data) {
+            if (data.error) {
+              alert(data.error);
+            } else if (data.success) {
+              alert(data.success);
+              Pages.Popup.closePopup();
+            }
+          },
+        });
+      } else {
+        alert("input correctly");
+      }
+    } else {
+      alert("reinput password and confirm");
+      let password = $(".re_pass").val("");
+      let confirm = $(".confirm").val("");
+    }
+  });
+
+  // profile end
+
   // sign out start
 
   $("#signOut").click(function () {
@@ -230,38 +283,38 @@ $(document).ready(function () {
 		$(".menu").hide();
 		let userinfo = JSON.parse(jsonPayload);
 		console.log(userinfo.realname);
-		$(".popup-profile").append(
-			+"<h2>PROFILE</h2>"
+		$(".popup-profile").html(
+			"<h2>PROFILE</h2>"
 			+"<p>Real Name</p>"
-			+"<input class='real_name' type='text' name="" placeholder='username or mail'>"
-			// +"<label>wrong</label>"
-			// +"<p>Sex</p>"
-			// +"<div>"
-			// +"	<select class="sex">"
-			// +"		<option value="1">Man</option>"
-			// +"		<option value="0">Woman</option>"
-			// +"	</select>"
-			// +"	<label>wrong</label>"
-			// +"</div>"
-			// +"<p>Birthday</p>"
-			// +"<input class="birthday" type="date" name="" placeholder="username or mail">"
-			// +"<label>wrong</label>"
-			// +"<p>Phone Number</p>"
-			// +"<input class="phone_number" type="text" name="" placeholder="username or mail">"
-			// +"<label>wrong</label>"
-			// +"<p>Mail</p>"
-			// +"<input class="mail" type="text" name="" placeholder="username or mail">"
-			// +"<label>wrong</label>"
-			// +"<p>Password</p>"
-			// +"<input class="re_pass" type="password" name="" placeholder="password">"
-			// +"<label>wrong</label>"
-			// +"<p>Confirm</p>"
-			// +"<input class="confirm" type="password" name="" placeholder="confirm">"
-			// +"<label>wrong</label>"
-			// +"<div class="register_btns dr jc t4">"
-			// +"	<div id="btnRegisterOk" class="btn_ok register_ok"><a href="#">register</a></div>"
-			// +"	<div class="btn_cancel register_cancel"><a href="#" onclick="Pages.Popup.closePopup();">cancel</a></div>"
-			// +"</div>"
+			+"<input class='real_name' type='text' placeholder='username or mail' value='"+userinfo.realname+"'>"
+			+"<label>wrong</label>"
+			+"<p>Sex</p>"
+			+"<div>"
+			+"	<select class='sex "+ userinfo.sex +"'>"
+			+"		<option value='1'>Man</option>"
+			+"		<option value='0'>Woman</option>"
+			+"	</select>"
+			+"	<label>wrong</label>"
+			+"</div>"
+			+"<p>Birthday</p>"
+			+"<input class='birthday' type='date' placeholder='username or mail' value='"+userinfo.birthday+"'>"
+			+"<label>wrong</label>"
+			+"<p>Phone Number</p>"
+			+"<input class='phone_number' type='text' placeholder='username or mail' value='"+userinfo.password+"'>"
+			+"<label>wrong</label>"
+			+"<p>Mail</p>"
+			+"<input class='mail' type='text' placeholder='username or mail'>"
+			+"<label>wrong</label>"
+			+"<p>Password</p>"
+			+"<input class='re_pass' type='password' placeholder='password'>"
+			+"<label>wrong</label>"
+			+"<p>Confirm</p>"
+			+"<input class='confirm' type='password' placeholder='confirm'>"
+			+"<label>wrong</label>"
+			+"<div class='register_btns dr jc t4'>"
+			+"	<div id='btnProfileOk' class='btn_ok profile_ok'><a href='#''>register</a></div>"
+			+"	<div class='btn_cancel register_cancel'><a href='#' onclick='Pages.Popup.closePopup();'>cancel</a></div>"
+			+"</div>"
 		);
 		
 	});

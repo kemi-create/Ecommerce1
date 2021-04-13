@@ -24,13 +24,11 @@ exports.signin = (req, res) => {
   const email = req.body.user_mail || "";
   const password = req.body.password || "";
 
-
   User.findOne({ email: email }, (err, user) => {
     if (err) throw err;
     if (Boolean(user)) {
       // Match Password
       bcrypt.compare(password, user.password, (err, isMatch) => {
-        console.log(isMatch);
         if (err) return err;
         if (isMatch) {
           // console.log(user);
@@ -38,7 +36,11 @@ exports.signin = (req, res) => {
             {
               id: user._id,
               email: user.email,
-              realname: user.realname
+              realname: user.realname,
+              sex: user.sex,
+              password: user.password,
+              birthday: user.birthday,
+              phonenumber: user.phonenumber,
             },
             config.jwtSecret
           );
@@ -114,8 +116,39 @@ exports.signup = (req, res) => {
         if (err) {
           res.json({ error: "user existed" });
           return err;
-        };
+        }
         res.json({ success: "success" });
+      });
+    });
+  });
+};
+
+exports.profileUpdate = (req, res) => {
+  const userId = req.authorId;
+  const realname = req.body.realname;
+  const sex = req.body.sex;
+  const email = req.body.email;
+  const password = req.body.password;
+  const birthday = req.body.birthday;
+  const phonenumber = req.body.phonenumber;
+
+  const userData = {
+    realname: realname,
+    sex: sex,
+    email: email,
+    password: password,
+    birthday: birthday,
+    phonenumber: phonenumber,
+  };
+
+  bcrypt.genSalt(10, (err, salt) => {
+    if (err) return err;
+    bcrypt.hash(userData.password, salt, (err, hash) => {
+      if (err) return err;
+      userData.password = hash;
+      User.findByIdAndUpdate(userId, userData, (err) => {
+        if (err) throw err;
+        else res.json({ success: "success" });
       });
     });
   });

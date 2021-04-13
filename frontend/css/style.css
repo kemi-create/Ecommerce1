@@ -144,12 +144,16 @@ section {
 	background-color: white;
 }
 
+.header .menu #profile a {
+	padding: 10px 64px;
+}
+
 .header .menu_without_section {
 	display: none;
 	position: absolute;
 	top: 70px;
 	width: 100%;
-	height: 100vh;
+	height: 90vh;
 	z-index: 1000;
 }
 
@@ -198,6 +202,14 @@ section {
 		padding: 10px 0!important;
 		display: flex;
 		justify-content: center;
+	}
+
+	.header .menu #profile {
+		padding: 0!important;
+	}
+
+	.header .menu #profile a {
+		padding: 10px 40%;
 	}
 
 	.header .login_in_re {
@@ -266,6 +278,10 @@ section {
     overflow-x: hidden;
     overflow-y: auto;
     opacity: 0;
+}
+
+.active {
+	z-index: 1000;
 }
 
 #popup.active {
@@ -412,7 +428,7 @@ section {
 }
 
 #popup .popup-login label {
-	padding: 5px 0;
+	padding: 0;
 	opacity: 0;
 }
 
@@ -435,7 +451,7 @@ section {
 	left: calc( 50% - 225px );
 	top: calc( 50% - 380px );
 	width: 350px;
-	height: 760px;
+	height: 710px;
 	padding: 25px 50px;
 	display: flex!important;
 	flex-direction: column;
@@ -453,11 +469,66 @@ section {
 }
 
 #popup .popup-register label {
-	padding: 5px 0;
+	padding: 0;
 	opacity: 0;
 }
 
+#popup .popup-register select {
+	width: 100%;
+	height: 38px;
+	border: 1px solid #aaa;
+	color: #555;
+	font-size: 18px;
+	outline-style: none;
+}
+
 #popup .popup-register .register_btns a {
+	width: 120px;
+	height: 35px;
+	margin: 10px 5px 0 5px;
+	border: 1px solid #999;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+#popup .popup-profile {
+	position: absolute;
+	left: calc( 50% - 225px );
+	top: calc( 50% - 380px );
+	width: 350px;
+	height: 710px;
+	padding: 25px 50px;
+	display: flex!important;
+	flex-direction: column;
+}
+
+#popup .popup-profile p {
+	display: flex;
+	justify-content: left;
+	margin: 5px 0;
+}
+
+#popup .popup-profile input {
+	height: 38px;
+	padding: 0 10px;
+}
+
+#popup .popup-profile label {
+	padding: 0;
+	opacity: 0;
+}
+
+#popup .popup-profile select {
+	width: 100%;
+	height: 38px;
+	border: 1px solid #aaa;
+	color: #555;
+	font-size: 18px;
+	outline-style: none;
+}
+
+#popup .popup-profile .register_btns a {
 	width: 120px;
 	height: 35px;
 	margin: 10px 5px 0 5px;
@@ -485,6 +556,16 @@ section {
 	}
 
 	#popup .popup-register {
+		position: absolute;
+		left: calc( 50% - 153px );
+		top: calc( 50% - 380px );
+	}
+	#popup .popup-profile {
+		width: 275px;
+		padding: 20px;
+	}
+
+	#popup .popup-profile {
 		position: absolute;
 		left: calc( 50% - 153px );
 		top: calc( 50% - 380px );

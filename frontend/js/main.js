@@ -388,7 +388,7 @@ $(document).ready(function () {
 			      for (var i = 0; i < data.products.length; i++) {
 			        // console.log("dddd", data.products[i]);
 			        console.log(data.products[i].favorite);
-			        	$("#favorite").text("Products");
+			        	$("#favorite").text("My Products");
 				        $(".user_favorite").append(
 				          "<div class='item'>" +
 				            "<div class='book_cover'><img src='" +

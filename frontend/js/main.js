@@ -22,12 +22,12 @@ $(document).ready(function () {
     );
     $.ajax({
 	    type: "GET",
-	    url: "http://localhost:8080/api/products",
+	    url: "http://192.168.107.47:8080/api/products",
 	    headers: { authorization: userData ? userData.token : null },
 	    success: function (data) {
 	      for (var i = 0; i < data.products.length; i++) {
 	        // console.log("dddd", data.products[i]);
-	        console.log(data.products[i].favourite);
+	        // console.log(data.products[i].favourite);
 		        $(".user_product").append(
 		          "<div class='item'>" +
 		            "<div class='book_cover'><img src='" +
@@ -40,11 +40,31 @@ $(document).ready(function () {
 		            "<div class='charge'>" +
 		            data.products[i].items +
 		            "</div>" +
-		            "<div class='favorite'><i class='fa fa-heart  "+data.products[i].favourite+" '></i></div>" +
+		            "<div class='favorite'><i id='"+data.products[i]._id+"' class='fa fa-heart  "+data.products[i].favourite+" '></i></div>" +
 		            "</div>" +
 		            "</div>"
 		        );
 	        }
+	        // favorite start
+
+			$(".fa-heart").click(function() {
+				let productid = this.id;
+				$.ajax({
+					type: "POST",
+					url: "http://192.168.107.47:8080/api/products/favourites/edit",
+					headers: { authorization: userData ? userData.token : null },
+					data: {
+						productid: productid,
+					},
+					success: function (data) {
+						console.log(data);
+						location.reload(true);
+						// $(".user_product").html("");
+				    },
+				});
+			});
+
+			// favorite end
 	    },
 	});
   } else {
@@ -54,7 +74,7 @@ $(document).ready(function () {
     $(".user_header").removeClass("df");
     $.ajax({
 	    type: "GET",
-	    url: "http://localhost:8080/api/products",
+	    url: "http://192.168.107.47:8080/api/products",
 	    headers: { authorization: userData ? userData.token : null },
 	    success: function (data) {
 	      for (var i = 0; i < data.products.length; i++) {
@@ -116,7 +136,7 @@ $(document).ready(function () {
     if (password) {
       $.ajax({
         type: "POST",
-        url: "http://localhost:8080/api/users/signin",
+        url: "http://192.168.107.47:8080/api/users/signin",
         data: {
           user_mail: user_mail,
           password: password,
@@ -184,7 +204,7 @@ $(document).ready(function () {
       ) {
         $.ajax({
           type: "POST",
-          url: "http://localhost:8080/api/users/signup",
+          url: "http://192.168.107.47:8080/api/users/signup",
           data: {
             realname: realname,
             sex: sex,
@@ -213,64 +233,12 @@ $(document).ready(function () {
   });
   // register end
 
-  // profile start
-
-$("#btnProfileOk").click(function () {
-    let realname = $(".real_name").val();
-    let sex = $(".sex").val();
-    let birthday = $(".birthday").val();
-    let phonenumber = $(".phone_number").val();
-    let mail = $(".mail").val();
-    let password = $(".re_pass").val();
-    let confirm = $(".confirm").val();
-    if (password == confirm) {
-      if (
-        realname != "" &&
-        sex != "" &&
-        birthday != "" &&
-        birthday != "mm/dd/yyyy" &&
-        phonenumber != "" &&
-        mail != "" &&
-        password != "" &&
-        confirm != ""
-      ) {
-        $.ajax({
-          type: "POST",
-          url: "http://localhost:8080//api/users/profile/edit",
-          data: {
-            realname: realname,
-            sex: sex,
-            birthday: birthday,
-            phonenumber: phonenumber,
-            mail: mail,
-            password: password,
-          },
-          success: function (data) {
-            if (data.error) {
-              alert(data.error);
-            } else if (data.success) {
-              alert(data.success);
-              Pages.Popup.closePopup();
-            }
-          },
-        });
-      } else {
-        alert("input correctly");
-      }
-    } else {
-      alert("reinput password and confirm");
-      let password = $(".re_pass").val("");
-      let confirm = $(".confirm").val("");
-    }
-  });
-
-  // profile end
-
   // sign out start
 
   $("#signOut").click(function () {
     localStorage.removeItem("user");
     location.reload(true);
+    $(".user_product").html("");
   });
 
   // sign out end
@@ -282,37 +250,37 @@ $("#btnProfileOk").click(function () {
 		$(".menu_without_section").hide();
 		$(".menu").hide();
 		let userinfo = JSON.parse(jsonPayload);
-		console.log(userinfo);
+		console.log(userinfo.birthday);
 		$(".popup-profile").html(
 			"<h2>PROFILE</h2>"
 			+"<p>Real Name</p>"
-			+"<input class='real_name' type='text' placeholder='username or mail' value='"+userinfo.realname+"'>"
+			+"<input class='pr_real_name' type='text' placeholder='username or mail' value='"+userinfo.realname+"'>"
 			+"<label>wrong</label>"
 			+"<p>Sex</p>"
 			+"<div>"
-			+"	<select class='sex "+ userinfo.sex +"'>"
+			+"	<select class='pr_sex "+ userinfo.sex +"'>"
 			+"		<option value='1'>Man</option>"
 			+"		<option value='0'>Woman</option>"
 			+"	</select>"
 			+"	<label>wrong</label>"
 			+"</div>"
 			+"<p>Birthday</p>"
-			+"<input class='birthday' type='date' placeholder='username or mail' value='"+userinfo.birthday+"'>"
+			+"<input class='pr_birthday' type='date' placeholder='username or mail' value='"+userinfo.birthday+"'>"
 			+"<label>wrong</label>"
 			+"<p>Phone Number</p>"
-			+"<input class='phone_number' type='text' placeholder='username or mail' value='"+userinfo.phonenumber+"'>"
+			+"<input class='pr_phone_number' type='text' placeholder='username or mail' value='"+userinfo.phonenumber+"'>"
 			+"<label>wrong</label>"
 			+"<p>Mail</p>"
-			+"<input class='mail' type='text' placeholder='username or mail' value='"+userinfo.email+"'>"
+			+"<input class='pr_mail' type='text' placeholder='username or mail' value='"+userinfo.email+"'>"
 			+"<label>wrong</label>"
 			+"<p>Old Password</p>"
-			+"<input class='old_pass' type='password' placeholder='old password'>"
+			+"<input class='pr_old_pass' type='password' placeholder='old password'>"
 			+"<label>wrong</label>"
 			+"<p>Password</p>"
-			+"<input class='re_pass' type='password' placeholder='password'>"
+			+"<input class='pr_password' type='password' placeholder='password'>"
 			+"<label>wrong</label>"
 			+"<p>Confirm</p>"
-			+"<input class='confirm' type='password' placeholder='confirm'>"
+			+"<input class='pr_confirm' type='password' placeholder='confirm'>"
 			+"<label>wrong</label>"
 			+"<div class='register_btns dr jc t4'>"
 			+"	<div class='btn_ok profile_ok'><a href='#' id='btnProfileOk'>save</a></div>"
@@ -320,28 +288,91 @@ $("#btnProfileOk").click(function () {
 			+"</div>"
 		);
 		$("#btnProfileOk").click(function() {
-			let realname = $(".real_name").val();
-			let sex = $(".sex").val();
-			let birthday = $(".birthday").val();
-			let phonenumber = $(".phone_number").val();
-			let mail = $(".mail").val();
-			let oldpass = $(".old_pass").val();
-			let password = $(".password").val();
-			let confirm = $(".confirm").val();
+			let realname = $(".pr_real_name").val();
+			let sex = $(".pr_sex").val();
+			let birthday = $(".pr_birthday").val();
+			let phonenumber = $(".pr_phone_number").val();
+			let mail = $(".pr_mail").val();
+			let oldpassword = $(".pr_old_pass").val();
+			let password = $(".pr_password").val();
+			let confirm = $(".pr_confirm").val();
 			let autopass = JSON.parse(jsonPayload).password;
-			console.log(autopass);
-			if (autopass == oldpass) {
-				
-			} else {
-				let oldpass = $(".old_pass").val("");
-				let password = $(".password").val("");
-				let confirm = $(".confirm").val("");
-			}
+			$.ajax({
+			    type: "POST",
+			    url: "http://192.168.107.47:8080/api/users/profile/edit",
+			    headers: { authorization: userData ? userData.token : null },
+			    data: {
+			    	realname: realname,
+			    	sex: sex,
+			    	birthday: birthday,
+			    	phonenumber: phonenumber,
+			    	mail: mail,
+		            oldpassword: oldpassword,
+		            password: password,
+		            confirm: confirm
+		          },
+			    success: function (data) {
+			      console.log(data);
+			      if (data.error == "No match old password") {
+			      	alert("No match old password");
+			      	$(".pr_old_pass").val("");
+			      	$(".pr_old_pass").focus();
+			      } else if(data.error == "No match confirm password") {
+			      	alert("No match confirm password");
+			      	$(".pr_password").val("");
+			      	$(".pr_confirm").val("");
+			      	$(".pr_password").focus();
+			      } else if (data.success == "success") {
+			      	alert("success");
+			      	Pages.Popup.closePopup();
+			      }
+			    },
+			});
 		});
 	});
 
 	// profile end
 
+	// search start
+	$("#btnSearch").click(function() {
+		let keyword = $("#iptSearch").val();
+		alert(keyword);
+		$.ajax({
+			type: "POST",
+			url: "http://192.168.107.47:8080/api/products/searchall",
+			headers: { authorization: userData ? userData.token : null },
+			data: {
+				searchtext: keyword,
+			  },
+			success: function (data) {
+				// console.log(data);
+				$(".user_product").html("");
+				for (var i = 0; i < data.products.length; i++) {
+				// console.log("dddd", data.products[i]);
+					console.log(data.products[i].favourite);
+				    $(".user_product").append(
+				      "<div class='item'>" +
+				        "<div class='book_cover'><img src='" +
+				        data.products[i].image +
+				        "'></div>" +
+				        "<div class='item_title t4 dr jc'>" +
+				        data.products[i].title +
+				        "</div>" +
+				        "<div class='charge_favorite dr jsb'>" +
+				        "<div class='charge'>" +
+				        data.products[i].items +
+				        "</div>" +
+				        "<div class='favorite'><i id='"+data.products[i]._id+"' class='fa fa-heart  "+data.products[i].favourite+" '></i></div>" +
+				        "</div>" +
+				        "</div>"
+				    );
+				}
+		    },
+		});
+	});
+	// search end
+
+	
 });
 
 

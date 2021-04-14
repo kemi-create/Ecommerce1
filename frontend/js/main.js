@@ -372,7 +372,50 @@ $(document).ready(function () {
 	});
 	// search end
 
-	
+	// favorite start
+	let fav = true;
+	$("#favorite").click(function() {
+		flag = !flag;
+		if (fav) {
+			fav = !fav
+			alert("a");
+			$(".user_product").html("");
+			$.ajax({
+			    type: "GET",
+			    url: "http://192.168.107.47:8080/api/products/favourites",
+			    headers: { authorization: userData ? userData.token : null },
+			    success: function (data) {
+			      for (var i = 0; i < data.products.length; i++) {
+			        // console.log("dddd", data.products[i]);
+			        console.log(data.products[i].favorite);
+			        	$("#favorite").text("Products");
+				        $(".user_favorite").append(
+				          "<div class='item'>" +
+				            "<div class='book_cover'><img src='" +
+				            data.products[i].image +
+				            "'></div>" +
+				            "<div class='item_title t4 dr jc'>" +
+				            data.products[i].title +
+				            "</div>" +
+				            "<div class='charge_favorite dr jsb'>" +
+				            "<div class='charge'>" +
+				            data.products[i].items +
+				            "</div>" +
+				            "<div class='favorite'><i class='fa fa-heart true'></i></div>" +
+				            "</div>" +
+				            "</div>"
+				        );
+			        }
+			        $(".menu").hide();
+			        $(".menu_without_section").hide()
+			    },
+			});
+		} else {
+			location.reload(true);
+		}
+	});
+
+	// favorite end	
 });
 
 

@@ -22,7 +22,7 @@ $(document).ready(function () {
     );
     $.ajax({
 	    type: "GET",
-	    url: "http://192.168.107.47:8080/api/products",
+	    url: "http://localhost:8080/api/products",
 	    headers: { authorization: userData ? userData.token : null },
 	    success: function (data) {
 	      for (var i = 0; i < data.products.length; i++) {
@@ -54,7 +54,7 @@ $(document).ready(function () {
     $(".user_header").removeClass("df");
     $.ajax({
 	    type: "GET",
-	    url: "http://192.168.107.47:8080/api/products",
+	    url: "http://localhost:8080/api/products",
 	    headers: { authorization: userData ? userData.token : null },
 	    success: function (data) {
 	      for (var i = 0; i < data.products.length; i++) {
@@ -116,7 +116,7 @@ $(document).ready(function () {
     if (password) {
       $.ajax({
         type: "POST",
-        url: "http://192.168.107.47:8080/api/users/signin",
+        url: "http://localhost:8080/api/users/signin",
         data: {
           user_mail: user_mail,
           password: password,
@@ -184,7 +184,7 @@ $(document).ready(function () {
       ) {
         $.ajax({
           type: "POST",
-          url: "http://192.168.107.47:8080/api/users/signup",
+          url: "http://localhost:8080/api/users/signup",
           data: {
             realname: realname,
             sex: sex,
@@ -236,7 +236,7 @@ $("#btnProfileOk").click(function () {
       ) {
         $.ajax({
           type: "POST",
-          url: "http://192.168.107.47:8080//api/users/profile/edit",
+          url: "http://localhost:8080//api/users/profile/edit",
           data: {
             realname: realname,
             sex: sex,
@@ -282,7 +282,7 @@ $("#btnProfileOk").click(function () {
 		$(".menu_without_section").hide();
 		$(".menu").hide();
 		let userinfo = JSON.parse(jsonPayload);
-		console.log(userinfo.realname);
+		console.log(userinfo);
 		$(".popup-profile").html(
 			"<h2>PROFILE</h2>"
 			+"<p>Real Name</p>"
@@ -300,10 +300,13 @@ $("#btnProfileOk").click(function () {
 			+"<input class='birthday' type='date' placeholder='username or mail' value='"+userinfo.birthday+"'>"
 			+"<label>wrong</label>"
 			+"<p>Phone Number</p>"
-			+"<input class='phone_number' type='text' placeholder='username or mail' value='"+userinfo.password+"'>"
+			+"<input class='phone_number' type='text' placeholder='username or mail' value='"+userinfo.phonenumber+"'>"
 			+"<label>wrong</label>"
 			+"<p>Mail</p>"
-			+"<input class='mail' type='text' placeholder='username or mail'>"
+			+"<input class='mail' type='text' placeholder='username or mail' value='"+userinfo.email+"'>"
+			+"<label>wrong</label>"
+			+"<p>Old Password</p>"
+			+"<input class='old_pass' type='password' placeholder='old password'>"
 			+"<label>wrong</label>"
 			+"<p>Password</p>"
 			+"<input class='re_pass' type='password' placeholder='password'>"
@@ -312,11 +315,29 @@ $("#btnProfileOk").click(function () {
 			+"<input class='confirm' type='password' placeholder='confirm'>"
 			+"<label>wrong</label>"
 			+"<div class='register_btns dr jc t4'>"
-			+"	<div id='btnProfileOk' class='btn_ok profile_ok'><a href='#''>register</a></div>"
+			+"	<div class='btn_ok profile_ok'><a href='#' id='btnProfileOk'>save</a></div>"
 			+"	<div class='btn_cancel register_cancel'><a href='#' onclick='Pages.Popup.closePopup();'>cancel</a></div>"
 			+"</div>"
 		);
-		
+		$("#btnProfileOk").click(function() {
+			let realname = $(".real_name").val();
+			let sex = $(".sex").val();
+			let birthday = $(".birthday").val();
+			let phonenumber = $(".phone_number").val();
+			let mail = $(".mail").val();
+			let oldpass = $(".old_pass").val();
+			let password = $(".password").val();
+			let confirm = $(".confirm").val();
+			let autopass = JSON.parse(jsonPayload).password;
+			console.log(autopass);
+			if (autopass == oldpass) {
+				
+			} else {
+				let oldpass = $(".old_pass").val("");
+				let password = $(".password").val("");
+				let confirm = $(".confirm").val("");
+			}
+		});
 	});
 
 	// profile end

@@ -494,13 +494,13 @@ section {
 
 #popup .popup-profile {
 	position: absolute;
-	left: calc( 50% - 225px );
-	top: calc( 50% - 380px );
-	width: 350px;
-	height: 710px;
-	padding: 25px 50px;
-	display: flex!important;
-	flex-direction: column;
+    left: calc( 50% - 225px );
+    top: calc( 50% - 440px );
+    width: 350px;
+    height: 824px;
+    padding: 25px 50px;
+    display: flex!important;
+    flex-direction: column;
 }
 
 #popup .popup-profile p {

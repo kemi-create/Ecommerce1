@@ -57,37 +57,6 @@ exports.signin = (req, res) => {
 
 exports.signup = (req, res) => {
   console.log(req.body);
-  if (!req.body.realname) {
-    res.status(400).send({
-      message: "Name can not be empty!",
-    });
-    return;
-  }
-  if (!req.body.mail) {
-    res.status(400).send({
-      message: "Mail can not be empty!",
-    });
-    return;
-  }
-  checkDuplicateEmail(req.body.mail);
-  if (!req.body.sex) {
-    res.status(400).send({
-      message: "Sex can not be empty!",
-    });
-    return;
-  }
-  if (!req.body.password) {
-    res.status(400).send({
-      message: "Password can not be empty!",
-    });
-    return;
-  }
-  // if (req.body.password !== req.body.password) {
-  //   res.status(400).send({
-  //     message: "Password can not be empty!",
-  //   });
-  //   return;
-  // }
   const realname = req.body.realname || "";
   const sex = req.body.sex || 0;
   const email = req.body.mail || "";
@@ -124,32 +93,50 @@ exports.signup = (req, res) => {
 };
 
 exports.profileUpdate = (req, res) => {
+  console.log(req.body);
   const userId = req.authorId;
   const realname = req.body.realname;
   const sex = req.body.sex;
-  const email = req.body.email;
+  const email = req.body.mail;
+  const oldPassword = req.body.oldpassword;
   const password = req.body.password;
+  const confirmPassword = req.body.confirm;
   const birthday = req.body.birthday;
   const phonenumber = req.body.phonenumber;
 
-  const userData = {
-    realname: realname,
-    sex: sex,
-    email: email,
-    password: password,
-    birthday: birthday,
-    phonenumber: phonenumber,
-  };
-
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) return err;
-    bcrypt.hash(userData.password, salt, (err, hash) => {
+  User.findById(userId, (err, user) => {
+    bcrypt.compare(oldPassword, user.password, (err, isMatch) => {
       if (err) return err;
-      userData.password = hash;
-      User.findByIdAndUpdate(userId, userData, (err) => {
-        if (err) throw err;
-        else res.json({ success: "success" });
-      });
+      if (isMatch) {
+        if (password == confirmPassword) {
+          const userData = {
+            realname: realname,
+            sex: sex,
+            email: email,
+            password: password,
+            birthday: birthday,
+            phonenumber: phonenumber,
+          };
+
+          bcrypt.genSalt(10, (err, salt) => {
+            if (err) return err;
+            bcrypt.hash(userData.password, salt, (err, hash) => {
+              if (err) return err;
+              userData.password = hash;
+              console.log(userData);
+              User.findByIdAndUpdate(userId, userData, (err) => {
+                // res.json({err});
+                if (err) res.json({ error: "email is existed already" });
+                else res.json({ success: "success" });
+              });
+            });
+          });
+        } else {
+          res.json({ error: "No match confirm password" });
+        }
+      } else {
+        res.json({ error: "No match old password" });
+      }
     });
   });
 };

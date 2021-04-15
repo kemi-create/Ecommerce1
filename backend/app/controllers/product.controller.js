@@ -21,51 +21,81 @@ exports.getAll = (req, res) => {
 };
 
 exports.searchAll = (req, res) => {
-  const searchTxt = req.body.searchTxt;
-
-  Product.find({ $text: { $search: searchTxt } }, (err, products) => {
-    let product = [];
-    products.forEach((data) => {
-      if (data.favourites.length != 0) {
-        data.favourites.forEach((item) => {
-          if (item == req.authorId) {
-            data.favourite = true;
-          } else data.favourite = false;
-        });
-      } else {
-        data.favourite = false;
-      }
-      product.push(data);
+  const searchTxt = req.body.searchtext;
+  console.log(req.body);
+  if (searchTxt == "") {
+    Product.find({}, (err, products) => {
+      if (err) throw err;
+      res.json({ products });
     });
-    res.json({ products: product });
-  });
+  } else {
+    Product.find({ title: { $regex: searchTxt } }, (err, products) => {
+      let product = [];
+      if (products.length != 0) {
+        products.forEach((data) => {
+          if (data.favourites.length != 0) {
+            data.favourites.forEach((item) => {
+              if (item == req.authorId) {
+                data.favourite = true;
+              } else data.favourite = false;
+            });
+          } else {
+            data.favourite = false;
+          }
+          product.push(data);
+        });
+        res.json({ products: product });
+      } else res.json({ products: [] });
+    });
+  }
 };
 
 exports.updateFavourite = (req, res) => {
-  const productId = req.body.product_id;
+  console.log(req.body);
+  const productId = req.body.productid;
   const authorId = req.authorId;
-  const favourites = req.body.favourites;
-  // const favourites = ["60734ab69eba931404cfe2f1"];
 
-  const index = favourites.indexOf(authorId);
-  if (index > -1) {
-    favourites.splice(index, 1);
-  } else {
-    favourites.push(authorId);
-  }
-
-  const updateData = {
-    favourites: favourites,
-  };
-
-  Product.findByIdAndUpdate(productId, updateData, (err) => {
+  Product.findById(productId, (err, products) => {
     if (err) throw err;
-    else res.json({ success: "success" });
+
+    const index = products.favourites.indexOf(authorId);
+    if (index > -1) {
+      products.favourites.splice(index, 1);
+    } else {
+      products.favourites.push(authorId);
+    }
+
+    const updateData = {
+      favourites: products.favourites,
+    };
+
+    Product.findByIdAndUpdate(productId, updateData, (err) => {
+      if (err) throw err;
+      else res.json({ success: "success" });
+    });
   });
 };
 
 exports.getFavourites = (req, res) => {
   Product.find({}, (err, products) => {
+    let product = [];
+    products.forEach((data) => {
+      data.favourites.forEach((item) => {
+        if (item == req.authorId) {
+          data.favourite = true;
+          product.push(data);
+        }
+      });
+    });
+    console.log(product);
+    res.json({ products: product });
+  });
+};
+
+exports.getSearchFavourites = (req, res) => {
+  const searchTxt = req.body.searchtext;
+
+  Product.find({ title: { $regex: searchTxt } }, (err, products) => {
     let product = [];
     products.forEach((data) => {
       data.favourites.forEach((item) => {

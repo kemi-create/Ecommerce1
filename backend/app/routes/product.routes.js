@@ -8,8 +8,9 @@ module.exports = (app) => {
   // Create a new User
   router.get("/", isAuthenticated, products.getAll);
   router.post("/searchall", isAuthenticated, products.searchAll);
-  router.post("/edit", isAuthenticated, products.updateFavourite);
+  router.post("/favourites/edit", isAuthenticated, products.updateFavourite);
   router.get("/favourites", isAuthenticated, products.getFavourites);
+  router.post("/favourites/search", isAuthenticated, products.getSearchFavourites);
   // router.get("/", products.getAll);
 
   app.use("/api/products", router);

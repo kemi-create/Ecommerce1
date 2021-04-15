@@ -22,7 +22,7 @@ $(document).ready(function () {
     );
     $.ajax({
 	    type: "GET",
-	    url: "http://192.168.107.47:8080/api/products",
+	    url: "http://localhost:8080/api/products",
 	    headers: { authorization: userData ? userData.token : null },
 	    success: function (data) {
 	      for (var i = 0; i < data.products.length; i++) {
@@ -51,7 +51,7 @@ $(document).ready(function () {
 				let productid = this.id;
 				$.ajax({
 					type: "POST",
-					url: "http://192.168.107.47:8080/api/products/favourites/edit",
+					url: "http://localhost:8080/api/products/favourites/edit",
 					headers: { authorization: userData ? userData.token : null },
 					data: {
 						productid: productid,
@@ -74,7 +74,7 @@ $(document).ready(function () {
     $(".user_header").removeClass("df");
     $.ajax({
 	    type: "GET",
-	    url: "http://192.168.107.47:8080/api/products",
+	    url: "http://localhost:8080/api/products",
 	    headers: { authorization: userData ? userData.token : null },
 	    success: function (data) {
 	      for (var i = 0; i < data.products.length; i++) {
@@ -136,7 +136,7 @@ $(document).ready(function () {
     if (password) {
       $.ajax({
         type: "POST",
-        url: "http://192.168.107.47:8080/api/users/signin",
+        url: "http://localhost:8080/api/users/signin",
         data: {
           user_mail: user_mail,
           password: password,
@@ -204,7 +204,7 @@ $(document).ready(function () {
       ) {
         $.ajax({
           type: "POST",
-          url: "http://192.168.107.47:8080/api/users/signup",
+          url: "http://localhost:8080/api/users/signup",
           data: {
             realname: realname,
             sex: sex,
@@ -299,7 +299,7 @@ $(document).ready(function () {
 			let autopass = JSON.parse(jsonPayload).password;
 			$.ajax({
 			    type: "POST",
-			    url: "http://192.168.107.47:8080/api/users/profile/edit",
+			    url: "http://localhost:8080/api/users/profile/edit",
 			    headers: { authorization: userData ? userData.token : null },
 			    data: {
 			    	realname: realname,
@@ -336,39 +336,77 @@ $(document).ready(function () {
 	// search start
 	$("#btnSearch").click(function() {
 		let keyword = $("#iptSearch").val();
-		alert(keyword);
-		$.ajax({
-			type: "POST",
-			url: "http://192.168.107.47:8080/api/products/searchall",
-			headers: { authorization: userData ? userData.token : null },
-			data: {
-				searchtext: keyword,
-			  },
-			success: function (data) {
-				// console.log(data);
-				$(".user_product").html("");
-				for (var i = 0; i < data.products.length; i++) {
-				// console.log("dddd", data.products[i]);
-					console.log(data.products[i].favourite);
-				    $(".user_product").append(
-				      "<div class='item'>" +
-				        "<div class='book_cover'><img src='" +
-				        data.products[i].image +
-				        "'></div>" +
-				        "<div class='item_title t4 dr jc'>" +
-				        data.products[i].title +
-				        "</div>" +
-				        "<div class='charge_favorite dr jsb'>" +
-				        "<div class='charge'>" +
-				        data.products[i].items +
-				        "</div>" +
-				        "<div class='favorite'><i id='"+data.products[i]._id+"' class='fa fa-heart  "+data.products[i].favourite+" '></i></div>" +
-				        "</div>" +
-				        "</div>"
-				    );
-				}
-		    },
-		});
+		// alert(keyword);
+		let nosearch = $("#favorite").text();
+		console.log(nosearch);
+		if (nosearch == "My Products") {
+			$(".user_product").hide();
+			$.ajax({
+				type: "POST",
+				url: "http://localhost:8080/api/products/favourites/search",
+				headers: { authorization: userData ? userData.token : null },
+				data: {
+					searchtext: keyword,
+				  },
+				success: function (data) {
+					// console.log(data);
+					$(".user_favorite").html("");
+					for (var i = 0; i < data.products.length; i++) {
+					// console.log("dddd", data.products[i]);
+						// console.log(data.products[i].favourite);
+					    $(".user_favorite").append(
+					      "<div class='item'>" +
+					        "<div class='book_cover'><img src='" +
+					        data.products[i].image +
+					        "'></div>" +
+					        "<div class='item_title t4 dr jc'>" +
+					        data.products[i].title +
+					        "</div>" +
+					        "<div class='charge_favorite dr jsb'>" +
+					        "<div class='charge'>" +
+					        data.products[i].items +
+					        "</div>" +
+					        "<div class='favorite'><i id='"+data.products[i]._id+"' class='fa fa-heart  "+data.products[i].favourite+" '></i></div>" +
+					        "</div>" +
+					        "</div>"
+					    );
+					}
+			    },
+			});
+		} else {
+			$.ajax({
+				type: "POST",
+				url: "http://localhost:8080/api/products/searchall",
+				headers: { authorization: userData ? userData.token : null },
+				data: {
+					searchtext: keyword,
+				  },
+				success: function (data) {
+					// console.log(data);
+					$(".user_product").html("");
+					for (var i = 0; i < data.products.length; i++) {
+					// console.log("dddd", data.products[i]);
+						// console.log(data.products[i].favourite);
+					    $(".user_product").append(
+					      "<div class='item'>" +
+					        "<div class='book_cover'><img src='" +
+					        data.products[i].image +
+					        "'></div>" +
+					        "<div class='item_title t4 dr jc'>" +
+					        data.products[i].title +
+					        "</div>" +
+					        "<div class='charge_favorite dr jsb'>" +
+					        "<div class='charge'>" +
+					        data.products[i].items +
+					        "</div>" +
+					        "<div class='favorite'><i id='"+data.products[i]._id+"' class='fa fa-heart  "+data.products[i].favourite+" '></i></div>" +
+					        "</div>" +
+					        "</div>"
+					    );
+					}
+			    },
+			});
+		}
 	});
 	// search end
 
@@ -378,11 +416,13 @@ $(document).ready(function () {
 		flag = !flag;
 		if (fav) {
 			fav = !fav
-			alert("a");
 			$(".user_product").html("");
+			$("#iptSearch").attr("disabled");
+			$(".search_button").attr("disabled");
+			let favsearch = "nosearch";
 			$.ajax({
 			    type: "GET",
-			    url: "http://192.168.107.47:8080/api/products/favourites",
+			    url: "http://localhost:8080/api/products/favourites",
 			    headers: { authorization: userData ? userData.token : null },
 			    success: function (data) {
 			      for (var i = 0; i < data.products.length; i++) {
@@ -407,7 +447,7 @@ $(document).ready(function () {
 				        );
 			        }
 			        $(".menu").hide();
-			        $(".menu_without_section").hide()
+			        $(".menu_without_section").hide();
 			    },
 			});
 		} else {

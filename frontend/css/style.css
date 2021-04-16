@@ -448,13 +448,13 @@ section {
 
 #popup .popup-register {
 	position: absolute;
-	left: calc( 50% - 225px );
-	top: calc( 50% - 380px );
-	width: 350px;
-	height: 710px;
-	padding: 25px 50px;
-	display: flex!important;
-	flex-direction: column;
+    left: calc( 50% - 225px );
+    top: calc( 50% - 370px );
+    width: 350px;
+    height: 700px;
+    padding: 20px 50px;
+    display: flex!important;
+    flex-direction: column;
 }
 
 #popup .popup-register p {
@@ -495,13 +495,20 @@ section {
 #popup .popup-profile {
 	position: absolute;
     left: calc( 50% - 225px );
-    top: calc( 50% - 440px );
+    top: calc( 50% - 370px );
     width: 350px;
-    height: 824px;
-    padding: 25px 50px;
+    height: 700px;
+    padding: 20px 50px;
     display: flex!important;
     flex-direction: column;
 }
+
+@media screen and (max-height: 700px) {
+	#popup #popup_container {
+		height: 150%;
+	}
+}
+
 
 #popup .popup-profile p {
 	display: flex;
@@ -512,11 +519,13 @@ section {
 #popup .popup-profile input {
 	height: 38px;
 	padding: 0 10px;
+	margin-bottom: 4px;
 }
 
 #popup .popup-profile label {
 	padding: 0;
 	opacity: 0;
+	display: none;
 }
 
 #popup .popup-profile select {

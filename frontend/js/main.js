@@ -22,7 +22,7 @@ $(document).ready(function () {
     );
     $.ajax({
 	    type: "GET",
-	    url: "http://localhost:8080/api/products",
+	    url: "http://localhost:8888/api/products",
 	    headers: { authorization: userData ? userData.token : null },
 	    success: function (data) {
 	      for (var i = 0; i < data.products.length; i++) {
@@ -51,7 +51,7 @@ $(document).ready(function () {
 				let productid = this.id;
 				$.ajax({
 					type: "POST",
-					url: "http://localhost:8080/api/products/favourites/edit",
+					url: "http://localhost:8888/api/products/favourites/edit",
 					headers: { authorization: userData ? userData.token : null },
 					data: {
 						productid: productid,
@@ -74,7 +74,7 @@ $(document).ready(function () {
     $(".user_header").removeClass("df");
     $.ajax({
 	    type: "GET",
-	    url: "http://localhost:8080/api/products",
+	    url: "http://localhost:8888/api/products",
 	    headers: { authorization: userData ? userData.token : null },
 	    success: function (data) {
 	      for (var i = 0; i < data.products.length; i++) {
@@ -136,7 +136,7 @@ $(document).ready(function () {
     if (password) {
       $.ajax({
         type: "POST",
-        url: "http://localhost:8080/api/users/signin",
+        url: "http://localhost:8888/api/users/signin",
         data: {
           user_mail: user_mail,
           password: password,
@@ -204,7 +204,7 @@ $(document).ready(function () {
       ) {
         $.ajax({
           type: "POST",
-          url: "http://localhost:8080/api/users/signup",
+          url: "http://localhost:8888/api/users/signup",
           data: {
             realname: realname,
             sex: sex,
@@ -299,7 +299,7 @@ $(document).ready(function () {
 			let autopass = JSON.parse(jsonPayload).password;
 			$.ajax({
 			    type: "POST",
-			    url: "http://localhost:8080/api/users/profile/edit",
+			    url: "http://localhost:8888/api/users/profile/edit",
 			    headers: { authorization: userData ? userData.token : null },
 			    data: {
 			    	realname: realname,
@@ -343,7 +343,7 @@ $(document).ready(function () {
 			$(".user_product").hide();
 			$.ajax({
 				type: "POST",
-				url: "http://localhost:8080/api/products/favourites/search",
+				url: "http://localhost:8888/api/products/favourites/search",
 				headers: { authorization: userData ? userData.token : null },
 				data: {
 					searchtext: keyword,
@@ -376,7 +376,7 @@ $(document).ready(function () {
 		} else {
 			$.ajax({
 				type: "POST",
-				url: "http://localhost:8080/api/products/searchall",
+				url: "http://localhost:8888/api/products/searchall",
 				headers: { authorization: userData ? userData.token : null },
 				data: {
 					searchtext: keyword,
@@ -422,7 +422,7 @@ $(document).ready(function () {
 			let favsearch = "nosearch";
 			$.ajax({
 			    type: "GET",
-			    url: "http://localhost:8080/api/products/favourites",
+			    url: "http://localhost:8888/api/products/favourites",
 			    headers: { authorization: userData ? userData.token : null },
 			    success: function (data) {
 			      for (var i = 0; i < data.products.length; i++) {

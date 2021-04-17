@@ -1,13 +1,13 @@
 const Product = require("./../models/product.model");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 
-const config = require("../config/jwt.config");
+//---------------------------------------- PRODUCT GET ALL START -------------------------------------------//
 
 exports.getAll = (req, res) => {
+  // product find
   Product.find({}, (err, products) => {
     let product = [];
     products.forEach((data) => {
+      // product favourite set
       data.favourite = false;
       data.favourites.forEach((item) => {
         if (item == req.authorId) {
@@ -20,9 +20,13 @@ exports.getAll = (req, res) => {
   });
 };
 
+//------------------------------------------ PRODUCT GET ALL END --------------------------------------------//
+
+//---------------------------------------- PRODUCT SEARCH ALL START -----------------------------------------//
+
 exports.searchAll = (req, res) => {
   const searchTxt = req.body.searchtext;
-  console.log(req.body);
+  
   if (searchTxt == "") {
     Product.find({}, (err, products) => {
       if (err) throw err;
@@ -35,6 +39,7 @@ exports.searchAll = (req, res) => {
         products.forEach((data) => {
           if (data.favourites.length != 0) {
             data.favourites.forEach((item) => {
+              // product favourite set
               if (item == req.authorId) {
                 data.favourite = true;
               } else data.favourite = false;
@@ -50,14 +55,18 @@ exports.searchAll = (req, res) => {
   }
 };
 
+//---------------------------------------- PRODUCT SEARCH ALL END -------------------------------------------//
+
+//---------------------------------- PRODUCT FAVOURITE DATA UPDATE START ------------------------------------//
+
 exports.updateFavourite = (req, res) => {
-  console.log(req.body);
   const productId = req.body.productid;
   const authorId = req.authorId;
 
   Product.findById(productId, (err, products) => {
     if (err) throw err;
 
+    // product favourites data by user
     const index = products.favourites.indexOf(authorId);
     if (index > -1) {
       products.favourites.splice(index, 1);
@@ -69,12 +78,17 @@ exports.updateFavourite = (req, res) => {
       favourites: products.favourites,
     };
 
+    // product favourite data update
     Product.findByIdAndUpdate(productId, updateData, (err) => {
       if (err) throw err;
       else res.json({ success: "success" });
     });
   });
 };
+
+//----------------------------------- PRODUCT FAVOURITE DATA UPDATE END -------------------------------------//
+
+//--------------------------------- PRODUCT FAVOURITE DATA GET ALL START ------------------------------------//
 
 exports.getFavourites = (req, res) => {
   Product.find({}, (err, products) => {
@@ -92,6 +106,10 @@ exports.getFavourites = (req, res) => {
   });
 };
 
+//---------------------------------- PRODUCT FAVOURITE DATA GET ALL END -------------------------------------//
+
+//-------------------------------- PRODUCT FAVOURITE DATA SEARCH ALL START ----------------------------------//
+
 exports.getSearchFavourites = (req, res) => {
   const searchTxt = req.body.searchtext;
 
@@ -99,6 +117,7 @@ exports.getSearchFavourites = (req, res) => {
     let product = [];
     products.forEach((data) => {
       data.favourites.forEach((item) => {
+        // product favourite set
         if (item == req.authorId) {
           data.favourite = true;
           product.push(data);
@@ -109,3 +128,5 @@ exports.getSearchFavourites = (req, res) => {
     res.json({ products: product });
   });
 };
+
+//--------------------------------- PRODUCT FAVOURITE DATA SEARCH ALL END -----------------------------------//

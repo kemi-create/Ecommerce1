@@ -26,8 +26,6 @@ $(document).ready(function () {
 	    headers: { authorization: userData ? userData.token : null },
 	    success: function (data) {
 	      for (var i = 0; i < data.products.length; i++) {
-	        // console.log("dddd", data.products[i]);
-	        // console.log(data.products[i].favourite);
 		        $(".user_product").append(
 		          "<div class='item'>" +
 		            "<div class='book_cover'><img src='" +
@@ -46,7 +44,6 @@ $(document).ready(function () {
 		        );
 	        }
 	        // favorite start
-
 			$(".fa-heart").click(function() {
 				let productid = this.id;
 				$.ajax({
@@ -63,7 +60,6 @@ $(document).ready(function () {
 				    },
 				});
 			});
-
 			// favorite end
 	    },
 	});
@@ -100,8 +96,6 @@ $(document).ready(function () {
 	    },
 	});
   }
-
-  
 
   // user_icon start
   let flag = true;
@@ -322,9 +316,7 @@ $(document).ready(function () {
 			});
 		});
 	});
-
 	// profile end
-
 	// search start
 	$("#btnSearch").click(function() {
 		let keyword = $("#iptSearch").val();
@@ -374,11 +366,8 @@ $(document).ready(function () {
 					searchtext: keyword,
 				  },
 				success: function (data) {
-					// console.log(data);
 					$(".user_product").html("");
 					for (var i = 0; i < data.products.length; i++) {
-					// console.log("dddd", data.products[i]);
-						// console.log(data.products[i].favourite);
 					    $(".user_product").append(
 					      "<div class='item'>" +
 					        "<div class='book_cover'><img src='" +
@@ -396,12 +385,27 @@ $(document).ready(function () {
 					        "</div>"
 					    );
 					}
+					$(".fa-heart").click(function() {
+						let productid = this.id;
+						$.ajax({
+							type: "POST",
+							url: "http://localhost:8888/api/products/favourites/edit",
+							headers: { authorization: userData ? userData.token : null },
+							data: {
+								productid: productid,
+							},
+							success: function (data) {
+								console.log(data);
+								location.reload(true);
+								// $(".user_product").html("");
+						    },
+						});
+					});
 			    },
 			});
 		}
 	});
 	// search end
-
 	// favorite start
 	let fav = true;
 	$("#favorite").click(function() {
@@ -422,7 +426,7 @@ $(document).ready(function () {
 			        console.log(data.products[i].favorite);
 			        	$("#favorite").text("My Products");
 				        $(".user_favorite").append(
-				          "<div class='item'>" +
+				          "<div id='"+data.products[i]._id+"' class='item'>" +
 				            "<div class='book_cover'><img src='" +
 				            data.products[i].image +
 				            "'></div>" +
@@ -433,11 +437,28 @@ $(document).ready(function () {
 				            "<div class='charge'>" +
 				            data.products[i].items +
 				            "</div>" +
-				            "<div class='favorite'><i class='fa fa-heart true'></i></div>" +
+				            "<div class='favorite'><i id='"+data.products[i]._id+"' class='fa fa-heart true'></i></div>" +
 				            "</div>" +
 				            "</div>"
 				        );
 			        }
+			        $(".fa-heart").click(function() {
+						let productid = this.id;
+						$("#"+this.id).hide();
+						$.ajax({
+							type: "POST",
+							url: "http://localhost:8888/api/products/favourites/edit",
+							headers: { authorization: userData ? userData.token : null },
+							data: {
+								productid: productid,
+							},
+							success: function (data) {
+								console.log(data);
+								// location.reload(true);
+								// $(".user_product").html("");
+						    },
+						});
+					});
 			        $(".menu").hide();
 			        $(".menu_without_section").hide();
 			    },
@@ -446,7 +467,6 @@ $(document).ready(function () {
 			location.reload(true);
 		}
 	});
-
 	// favorite end	
 });
 

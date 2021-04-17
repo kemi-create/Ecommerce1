@@ -8,8 +8,10 @@
 	<link rel="stylesheet" type="text/css" href="./css/style.css">
 </head>
 <body>
+	<!-- header start -->
 	<header>
 		<div class="header">
+			<!-- before sigin in start -->
 			<div class="home_header dr jsb">
 				<div class="brand t1"><a href="#">Book Store</a></div>
 				<div class="login_in_re dr">
@@ -17,6 +19,8 @@
 					<a id="btnRegister" class="register" href='javascript: Pages.Popup.openPopupByElement(".popup-register", {showCloseBtn: false}); void(0);'>Register</a>
 				</div>
 			</div>
+			<!-- before sigin in end -->
+			<!-- after sigin in start -->
 			<div class="user_header dr jsb dn">
 				<div class="brand t1"><a href="#">Book Store</a></div>
 				<div class="user"><i class="user_icon fa fa-user-circle-o t1"></i></div>
@@ -27,13 +31,17 @@
 				</div>
 				<div class="menu_without_section"></div>
 			</div>
+			<!-- after sigin in end -->
 		</div>
 	</header>
+	<!-- header end -->
 
 	<div class="body">
+		<!-- modal start -->
 		<div id="popup">
 			<div id="popup_container">
 				<div id="popup_content">
+					<!-- login modal start -->
 					<div class="popup popup-login">
 						<h2>LOGIN</h2>
 						<p>Username or Email</p>
@@ -47,6 +55,8 @@
 							<div class="btn_cancel login_cancel"><a href="#" onclick="Pages.Popup.closePopup();">cancel</a></div>
 						</div>
 					</div>
+					<!-- login modal end -->
+					<!-- register modal start -->
 					<div class="popup popup-register">
 						<h2>REGISTER</h2>
 						
@@ -81,24 +91,36 @@
 							<div class="btn_cancel register_cancel"><a href="#" onclick="Pages.Popup.closePopup();">cancel</a></div>
 						</div>
 					</div>
+					<!-- register modal end -->
+					<!-- profile modal start -->
 					<div class="popup popup-profile"></div>
+					<!-- profile modal end -->
 				</div>
 			</div>
 		</div>
+		<!-- modal end -->
+		<!-- search section start -->
 		<section class="title dr jc t2"></section>
 		<section class="search dr jc">
 			<div class="search_box"><input id="iptSearch" type="text" placeholder="search" name=""></div>
 			<div class="search_button"><input id="btnSearch" type="button" name="" value="search"></div>
 		</section>
+		<!-- search section end -->
+		<!-- product section start -->
 		<section class="item_list">
-
-				<div class="home_product row dr jc"></div>
-				<div class="user_product row dr jc"></div>
-				<div class="user_favorite row dr jc"></div>
-			
+			<!-- before sigin in start -->
+			<div class="home_product row dr jc"></div>
+			<!-- before sigin in end -->
+			<!-- after sigin in start -->
+			<div class="user_product row dr jc"></div>
+			<!-- after sigin in end -->
+			<!-- favorit section start -->
+			<div class="user_favorite row dr jc"></div>
+			<!-- favorit section end -->
 		</section>
+		<!-- product senction end -->
 	</div>
-	
+	<!-- footer section start -->
 	<footer>
 		<div class="footer_top dr jsa aic">
 			<div class="phone_number">
@@ -128,6 +150,7 @@
 		</div>
 		<div class="up_arrow"><a href="#">^</a></div>
 	</footer>
+	<!-- footer section end -->
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="./js/main.js"></script>

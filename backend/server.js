@@ -1,15 +1,10 @@
-require('dotenv').config()
+require("dotenv").config();
 const express = require("express");
-const bodyParser = require("body-parser");
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
-const config = require('./app/config/db.config');
-const path = require('path');
-
-// var corsOptions = {
-//   origin: "http://localhost:8081",
-// };
+const config = require("./app/config/db.config");
+const path = require("path");
 
 app.use(cors());
 
@@ -18,21 +13,24 @@ app.use(express.json());
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '/')));
+app.use(express.static(path.join(__dirname, "/")));
 
-const MONGODB_URI = config.mongodburi || 'mongodb://localhost:27017/ecommerce';
+const MONGODB_URI = config.mongodburi || "mongodb://localhost:27017/ecommerce";
 
 mongoose.connect(MONGODB_URI, {
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    useCreateIndex: true
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true,
 });
-mongoose.connection.on('connected', () => {
-    console.log('Connected to MongoDB');
+
+mongoose.connection.on("connected", () => {
+  console.log("Connected to MongoDB");
 });
-mongoose.connection.on('error', (error) => {
-    console.log(error);
+
+mongoose.connection.on("error", (error) => {
+  console.log(error);
 });
+
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to bezkoder application." });
@@ -42,7 +40,7 @@ require("./app/routes/user.routes")(app);
 require("./app/routes/product.routes")(app);
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8888;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });

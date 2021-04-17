@@ -4,21 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const config = require("../config/jwt.config");
 
-const checkDuplicateEmail = (email) => {
-  // Email
-  User.findOne({
-    where: {
-      email: email,
-    },
-  }).then((user) => {
-    if (user) {
-      res.status(400).send({
-        message: "Failed! Email is already in use!",
-      });
-      return;
-    }
-  });
-};
+//---------------------------------------- USER SIGN IN START -------------------------------------------//
 
 exports.signin = (req, res) => {
   const email = req.body.user_mail || "";
@@ -31,7 +17,6 @@ exports.signin = (req, res) => {
       bcrypt.compare(password, user.password, (err, isMatch) => {
         if (err) return err;
         if (isMatch) {
-          // console.log(user);
           const token = jwt.sign(
             {
               id: user._id,
@@ -55,8 +40,11 @@ exports.signin = (req, res) => {
   });
 };
 
+//----------------------------------------- USER SIGN IN END --------------------------------------------//
+
+//---------------------------------------- USER SIGN UP START -------------------------------------------//
+
 exports.signup = (req, res) => {
-  console.log(req.body);
   const realname = req.body.realname || "";
   const sex = req.body.sex || 0;
   const email = req.body.mail || "";
@@ -92,8 +80,11 @@ exports.signup = (req, res) => {
   });
 };
 
+//----------------------------------------- USER SIGN UP END --------------------------------------------//
+
+//------------------------------------- USER PROFILE UPDATE START ---------------------------------------//
+
 exports.profileUpdate = (req, res) => {
-  console.log(req.body);
   const userId = req.authorId;
   const realname = req.body.realname;
   const sex = req.body.sex;
@@ -105,6 +96,7 @@ exports.profileUpdate = (req, res) => {
   const phonenumber = req.body.phonenumber;
 
   User.findById(userId, (err, user) => {
+    // password match
     bcrypt.compare(oldPassword, user.password, (err, isMatch) => {
       if (err) return err;
       if (isMatch) {
@@ -118,14 +110,14 @@ exports.profileUpdate = (req, res) => {
             phonenumber: phonenumber,
           };
 
+          // password hash
           bcrypt.genSalt(10, (err, salt) => {
             if (err) return err;
             bcrypt.hash(userData.password, salt, (err, hash) => {
               if (err) return err;
               userData.password = hash;
-              console.log(userData);
+              
               User.findByIdAndUpdate(userId, userData, (err) => {
-                // res.json({err});
                 if (err) res.json({ error: "email is existed already" });
                 else res.json({ success: "success" });
               });
@@ -140,3 +132,5 @@ exports.profileUpdate = (req, res) => {
     });
   });
 };
+
+//-------------------------------------- USER PROFILE UPDATE END ----------------------------------------//

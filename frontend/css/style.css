@@ -427,6 +427,10 @@ section {
 	padding: 0 10px;
 }
 
+#popup .popup-login p {
+	margin-top: 15px;
+}
+
 #popup .popup-login label {
 	padding: 0;
 	opacity: 0;
@@ -596,6 +600,10 @@ section {
 
 .body .search {
 
+}
+
+.login_btns {
+	margin-top: 20px;
 }
 
 input {

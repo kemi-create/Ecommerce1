@@ -437,12 +437,12 @@ $(document).ready(function () {
 				            "<div class='charge'>" +
 				            data.products[i].items +
 				            "</div>" +
-				            "<div class='favorite'><i id='"+data.products[i]._id+"' class='fa fa-heart true'></i></div>" +
+				            "<div class='favorite dr'><div class='fav_delete' id='"+data.products[i]._id+"'>delete</div><i id='"+data.products[i]._id+"' class='fa fa-heart true'></i></div>" +
 				            "</div>" +
 				            "</div>"
 				        );
 			        }
-			        $(".fa-heart").click(function() {
+			        $(".fav_delete").click(function() {
 						let productid = this.id;
 						$("#"+this.id).hide();
 						$.ajax({

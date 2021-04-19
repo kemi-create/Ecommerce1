@@ -705,6 +705,19 @@ input {
 	font-size: 20px;
 }
 
+.body .item_list .row .item .favorite div {
+	border: 1px solid #999;
+    margin: 0 10px 0 0;
+    padding: 1px 5px;
+    cursor: pointer;
+    background-color: #ccc;
+}
+
+.body .item_list .row .item .favorite div:hover {
+    background-color: #ddd;
+
+}
+
 @media screen and ( max-width: 1024px ) {
 	section {
 		padding: 0 100px;
